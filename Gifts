@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            /* Video jaisa deep pink/purple gradient */
+            background: linear-gradient(135deg, #5a093b, #a31a5c);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Floating Hearts Animation Background */
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -100px;
+            width: 30px;
+            height: 30px;
+            background-color: #ffb8c6;
+            transform: rotate(-45deg);
+            animation: floatUp 6s infinite ease-in;
+            opacity: 0.5;
+            box-shadow: 0 0 10px rgba(255, 184, 198, 0.5);
+        }
+
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: inherit;
+            border-radius: 50%;
+        }
+
+        .heart::before { top: -15px; left: 0; }
+        .heart::after { top: 0; left: 15px; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(-45deg) scale(0.6); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translateY(-120vh) rotate(45deg) scale(1.5); opacity: 0; }
+        }
+
+        /* Modern Glassmorphism Cards */
+        .card-container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 420px;
+            height: 520px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8) translateY(30px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .card p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #f1f1f1;
+        }
+
+        /* Grid for Reasons */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .reason-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .reason-box i { font-size: 24px; display: block; margin-bottom: 8px;}
+
+        /* Outlined Animated Buttons */
+        .outline-btn {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease, border-color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .outline-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: #fff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+            z-index: -1;
+        }
+
+        .outline-btn:hover {
+            color: #a31a5c;
+            border-color: #fff;
+        }
+
+        .outline-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .outline-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Image/Emoji placeholder */
+        .image-placeholder {
+            width: 100%;
+            height: 140px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            border: 1px dashed rgba(255,255,255,0.4);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Floating hearts in background -->
+    <div class="hearts-container" id="hearts-container"></div>
+
+    <div class="card-container">
+        
+        <!-- Step 1 -->
+        <div class="card active" id="card-1">
+            <div style="font-size: 45px; margin-bottom: 10px; animation: pulse 2s infinite;">❤️</div>
+            <h2>Hello, My Love.</h2>
+            <p>Every beat of my heart whispers your name. On this special day, I wanted to create a small piece of magic just for you.</p>
+            <button class="outline-btn" onclick="nextCard(1, 2)">Unwrap My Feelings</button>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="card" id="card-2">
+            <div style="font-size: 45px; margin-bottom: 10px;">✨</div>
+            <h2>To My Wonderful Partner, Happy Birthday!</h2>
+            <p>Your presence illuminates my world. Another year older, another year more beautiful, inside and out. I cherish you deeply.</p>
+            <button class="outline-btn" onclick="nextCard(2, 3)">Next</button>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="card" id="card-3">
+            <h2>Countless Reasons Why I Adore You</h2>
+            <div class="reasons-grid">
+                <div class="reason-box">
+                    <i>😂</i>
+                    <b>Your Laughter</b><br>It brightens even the darkest days.
+                </div>
+                <div class="reason-box">
+                    <i>🧠</i>
+                    <b>Your Mind</b><br>Always inspiring me with your intelligence.
+                </div>
+            </div>
+            <button class="outline-btn" onclick="nextCard(3, 4)">See More</button>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="card" id="card-4">
+            <h2>A Snapshot of Our Story...</h2>
+            <!-- Yahan aap apni image lagana chahein toh <img> tag use kar sakte hain -->
+            <div class="image-placeholder">💑</div>
+            <p>"Us" - my absolute favorite chapter.</p>
+            <button class="outline-btn" onclick="nextCard(4, 5)">Make a Wish</button>
+        </div>
+
+        <!-- Step 5 (Final with Confetti) -->
+        <div class="card" id="card-5">
+            <div style="font-size: 45px; margin-bottom: 10px;">💖</div>
+            <h2>My Deepest Wish For You</h2>
+            <p>May this year be filled with boundless joy, new discoveries, and the realization of every dream your beautiful heart holds.</p>
+            <h3 style="margin-bottom: 20px; font-weight: 600; font-size: 18px; color: #ffeb3b;">Happy Birthday, My Sweetest Love!</h3>
+            <button class="outline-btn" onclick="triggerConfetti()">Celebrate! 🎉</button>
+        </div>
+        
+    </div>
+
+    <!-- External Confetti Library for realistic celebration effect -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Background Floating Hearts Generator
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const colors = ['#ffb8c6', '#ff7eb3', '#ff758c', '#ffffff'];
+            
+            for(let i=0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('heart');
+                // Randomize positions, animation speeds, and delay
+                heart.style.left = (Math.random() * 100) + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                
+                // Assign random colors
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.backgroundColor = randomColor;
+                
+                // Set pseudo element colors dynamically
+                const style = document.createElement('style');
+                const className = 'heart-color-' + i;
+                heart.classList.add(className);
+                style.innerHTML = `.${className}::before, .${className}::after { background-color: ${randomColor} !important; }`;
+                document.head.appendChild(style);
+
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // Card Switching Logic
+        function nextCard(currentId, nextId) {
+            const currentCard = document.getElementById('card-' + currentId);
+            const nextCard = document.getElementById('card-' + nextId);
+            
+            currentCard.classList.remove('active');
+            
+            setTimeout(() => {
+                nextCard.classList.add('active');
+            }, 300); // Wait for fade-out before fading in next card
+        }
+
+        // Trigger Confetti Blast on the final card
+        function triggerConfetti() {
+            var duration = 3000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 6,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff758c', '#ffffff', '#ffeb3b']
+                });
+                confetti({
+                    particleCount: 6,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff758c', '#ffffff', '#ffeb3b']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
+</body>
+</html>
